@@ -10,7 +10,7 @@
     Background="White"
     mc:Ignorable="d">
     <StackPanel>
-        <Label Content="{Binding ComponentName}" />
+        <Label Content="Block name" />
         <Expander Header="Propertyes" IsExpanded="True">
             <DataGrid />
         </Expander>

@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Diagnostics;
-using System.Linq;
-using System.Threading;
 
 namespace kYa.TaskKiller.Main;
 class Program
 {
     public static void Main()
     {
-        new Thread(_FiveHundred).Start();
     }
 
     private static void _FiveHundred()

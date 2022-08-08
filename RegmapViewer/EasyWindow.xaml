@@ -12,7 +12,8 @@
     <Grid>
         <ScrollViewer VerticalScrollBarVisibility="Auto">
             <StackPanel x:Name="MainStackPanel">
-                <local:BlockInfo ComponentName="Test component" />
+                <local:BlockInfo x:Name="SpecBlock" ComponentName="Test component" />
+                <Button Click="Button_Click" Content="Test" />
             </StackPanel>
         </ScrollViewer>
     </Grid>
