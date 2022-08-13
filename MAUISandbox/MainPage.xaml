@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="MAUISandbox.MainPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <Grid>
+        <Grid.Resources>
+            <Style TargetType="Button">
+                <Setter Property="VerticalOptions" Value="CenterAndExpand" />
+                <Setter Property="HorizontalOptions" Value="CenterAndExpand" />
+            </Style>
+        </Grid.Resources>
+
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <Button
+            Grid.Row="0"
+            Grid.Column="1"
+            Text="U" />
+
+        <Button
+            Grid.Row="1"
+            Grid.Column="0"
+            Text="L" />
+        <Button
+            Grid.Row="1"
+            Grid.Column="1"
+            Text="RR" />
+        <Button
+            Grid.Row="1"
+            Grid.Column="2"
+            Text="R" />
+
+        <Button
+            Grid.Row="2"
+            Grid.Column="1"
+            Text="B" />
+    </Grid>
+
+</ContentPage>
