@@ -1,25 +1,34 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Collections.Generic;
+using System.Collections;
 
 namespace kYa.TaskKiller.Main;
 class Program
 {
     public static void Main()
     {
+
+        var a = GetInts();
+
+        a.MoveNext();
+        a.MoveNext();
+        a.MoveNext();
+        a.MoveNext();
+        
+        a = GetInts();
+        a.MoveNext();
+        a.MoveNext();
+
+        Console.WriteLine();
     }
 
-    private static void _FiveHundred()
+    static IEnumerator GetInts()
     {
-        while(true)
-        {
-            foreach (var process in Process.GetProcesses().Where(el => el.ProcessName.Contains("ZSA")))
-            {
-                Console.WriteLine(process.ProcessName);
-                process.Kill();
-            }
+        Console.WriteLine("first");
+        yield return 1;
 
-            Thread.Sleep(500);
-            Console.Clear();
-        }
+        Console.WriteLine("second");
+        yield return 2;
     }
 }
