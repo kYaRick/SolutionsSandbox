@@ -8,9 +8,12 @@ IMG_DEMO_TIME = 2000                #ms
 IS_SHOW_TASK_1 = False
 IS_SHOW_TASK_2 = False
 IS_SHOW_TASK_3 = False
-IS_SHOW_TASK_4 = True
+IS_SHOW_TASK_4 = False
+IS_SHOW_TASK_5 = False
 
-img = cv2.imread("src/giraffe.png") #src
+#Sources path:
+img = cv2.imread("src/giraffe.png")
+img2 = cv2.imread("src/wynn.png")
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
 
 
@@ -45,8 +48,6 @@ if IS_SHOW_TASK_1:
 #   -- So, my answer based on https://stackoverflow.com/questions/50756306/syntax-for-ap-add-argument:
 #   -- ap.add_argument("-o", "--output", required=True)
 #endregion
-
-
 #region 2 - Image Basics Quiz
 if IS_SHOW_TASK_2:
     rows = 383
@@ -90,8 +91,6 @@ if IS_SHOW_TASK_2:
 #   -- I didn't search for the tutorial files so I just did it with the giraffe image and got this:
 #   -- Blue: 154 Green: 192 Red: 238
 #endregion
-
-
 #region 3 - Drawing Quiz
 if IS_SHOW_TASK_3:
     canvas = np.zeros((200, 300, 3), dtype="uint8")
@@ -105,7 +104,6 @@ if IS_SHOW_TASK_3:
 # - What is the correct line of code to draw a blue, filled-in rectangle starting at point (10, 10) and ending at point (60, 60)?
 #   -- cv2.rectangle(canvas, (10, 10), (60, 60), (255, 0, 0), -1)
 #endregion
-
 #region 4 - Translation Quiz
 #info: https://pyimagesearch.com/2021/02/03/opencv-image-translation/
 if IS_SHOW_TASK_4:
@@ -130,4 +128,33 @@ if IS_SHOW_TASK_4:
 #   -- M = np.float32([[1, 0, -10], [0, 1, 90]])
 # - Define a translation matrix to shift an image 15 pixels to the left and 20 pixels up.
 #   -- M = np.float32([[1, 0, -15], [0, 1, -20]])
+#endregion
+#region 5 - Rotation Quiz
+if IS_SHOW_TASK_5:
+    
+    def rotate(in_image, angle, t_x = 0, t_y = 0, is_clockwise = True):
+        height, width = img2.shape[:2]
+
+        if (t_x == 0 and t_y == 0):
+            t_x = width//2
+            t_y = height//2
+
+        angle = -angle if is_clockwise else angle 
+
+        a_matrix = cv2.getRotationMatrix2D((t_x, t_y), angle, 1)
+        return cv2.warpAffine(in_image, a_matrix, (width, height))
+    
+    list([1, 2, 3]).reverse
+
+    print(f"After rotated the image 30 degrees clockwise at point x=335 and y=254,\n\tpixel state next: {rotate(img2, 30)[254, 335]}")
+    print(f"After rotated the image 110 degrees counter-clockwise at point x=312 and y=136,\n\tpixel state next: {rotate(img2, -110)[136, 312]}")
+    print(f"After rotated the image 88 degrees counter-clockwise x=10 and y=10,\n\tpixel state next: {rotate(img2, -88, 50, 50)[10, 10]}")
+
+#~> "Corect answers"
+# - Use OpenCV to rotate the image 30 degrees clockwise. What is the value of the pixel located at x=335 and y=254? (wynn.png)
+#   -- R=95, G=93, B=61
+# - Now rotate the image 110 degrees counter-clockwise. What is the value of the pixel located at x=312, y=136? (wynn.png)
+#   -- R=180, G=141, B=148
+# - Change the call to cv2.getRotationMatrix2D to rotate the image 88 degrees counter-clockwise about coordinate (50, 50). What is the value of the pixel located at point (10, 10)? (wynn.png)
+#   -- R=28, G=81, B=67
 #endregion
