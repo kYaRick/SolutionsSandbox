@@ -6,8 +6,9 @@ import cv2
 #~~~~~~~~~~~~ Config flags ~~~~~~~~~~~~#
 IMG_DEMO_TIME = 2000                #ms
 IS_SHOW_TASK_1 = False
-IS_SHOW_TASK_2 = False;
-IS_SHOW_TASK_3 = True;
+IS_SHOW_TASK_2 = False
+IS_SHOW_TASK_3 = False
+IS_SHOW_TASK_4 = True
 
 img = cv2.imread("src/giraffe.png") #src
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
@@ -103,4 +104,30 @@ if IS_SHOW_TASK_3:
 #   -- canvas = np.zeros((200, 300), dtype="uint8")
 # - What is the correct line of code to draw a blue, filled-in rectangle starting at point (10, 10) and ending at point (60, 60)?
 #   -- cv2.rectangle(canvas, (10, 10), (60, 60), (255, 0, 0), -1)
+#endregion
+
+#region 4 - Translation Quiz
+#info: https://pyimagesearch.com/2021/02/03/opencv-image-translation/
+if IS_SHOW_TASK_4:
+    a_matrix = np.array([[1, 0, 30], [0, 1, -50]], dtype=np.float32)
+    u50r30 = cv2.warpAffine(img, a_matrix, (img.shape[1], img.shape[0])) 
+
+    a_matrix = np.array([[1, 0, -10], [0, 1, 90]], dtype=np.float32)
+    d90l10 = cv2.warpAffine(img, a_matrix, (img.shape[1], img.shape[0]))
+
+    a_matrix = np.array([[1, 0, -15], [0, 1, -20]], dtype=np.float32)
+    u15l20 = cv2.warpAffine(img, a_matrix, (img.shape[1], img.shape[0]))
+
+    cv2.imshow("Image: u50r30", u50r30)
+    cv2.imshow("Image: d90l10", d90l10)
+    cv2.imshow("Image: u15l20", u15l20)
+    cv2.waitKey(IMG_DEMO_TIME)
+    cv2.destroyAllWindows()
+#~> "Corect answers"
+# - Define a translation matrix to shift an image 30 pixels up and 50 pixels to the right.
+#   -- M = np.float32([[1, 0, 50], [0, 1, -30]])
+# - Define a translation matrix to shift an image 90 pixels down and 10 pixels to to the left.
+#   -- M = np.float32([[1, 0, -10], [0, 1, 90]])
+# - Define a translation matrix to shift an image 15 pixels to the left and 20 pixels up.
+#   -- M = np.float32([[1, 0, -15], [0, 1, -20]])
 #endregion
