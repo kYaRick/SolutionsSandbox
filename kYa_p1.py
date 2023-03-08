@@ -9,14 +9,25 @@ IS_SHOW_TASK_1 = False
 IS_SHOW_TASK_2 = False
 IS_SHOW_TASK_3 = False
 IS_SHOW_TASK_4 = False
-IS_SHOW_TASK_5 = False
+IS_SHOW_TASK_5 = True
+IS_SHOW_TASK_6 = False
+IS_SHOW_TASK_7 = False
 
 #Sources path:
 img = cv2.imread("src/giraffe.png")
 img2 = cv2.imread("src/wynn.png")
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
 
+#region Global scope
+def rotate(in_image, angle, t_x = 0, t_y = 0):
+    if (t_x == 0 and t_y == 0):
+        t_y, t_x = in_image.shape[:2]
+        t_x //= 2
+        t_y //= 2
 
+    M = cv2.getRotationMatrix2D((t_x, t_y), angle, 1)
+    return cv2.warpAffine(in_image, M, (in_image.shape[1] , in_image.shape[0]))
+#endregion
 #region 1 - Loading, Displaying, and Saving Images Quiz
 #~> info:
 # - Height represents the number of pixel rows in the image or the number of pixels in each column of the image array.
@@ -131,30 +142,51 @@ if IS_SHOW_TASK_4:
 #endregion
 #region 5 - Rotation Quiz
 if IS_SHOW_TASK_5:
-    
-    def rotate(in_image, angle, t_x = 0, t_y = 0, is_clockwise = True):
-        height, width = img2.shape[:2]
-
-        if (t_x == 0 and t_y == 0):
-            t_x = width//2
-            t_y = height//2
-
-        angle = -angle if is_clockwise else angle 
-
-        a_matrix = cv2.getRotationMatrix2D((t_x, t_y), angle, 1)
-        return cv2.warpAffine(in_image, a_matrix, (width, height))
-    
-    list([1, 2, 3]).reverse
-
     print(f"After rotated the image 30 degrees clockwise at point x=335 and y=254,\n\tpixel state next: {rotate(img2, 30)[254, 335]}")
     print(f"After rotated the image 110 degrees counter-clockwise at point x=312 and y=136,\n\tpixel state next: {rotate(img2, -110)[136, 312]}")
     print(f"After rotated the image 88 degrees counter-clockwise x=10 and y=10,\n\tpixel state next: {rotate(img2, -88, 50, 50)[10, 10]}")
 
 #~> "Corect answers"
 # - Use OpenCV to rotate the image 30 degrees clockwise. What is the value of the pixel located at x=335 and y=254? (wynn.png)
-#   -- R=95, G=93, B=61
+#   -- R=88, G=129, B=162
 # - Now rotate the image 110 degrees counter-clockwise. What is the value of the pixel located at x=312, y=136? (wynn.png)
-#   -- R=180, G=141, B=148
+#   -- R=39, G=111, B=166
 # - Change the call to cv2.getRotationMatrix2D to rotate the image 88 degrees counter-clockwise about coordinate (50, 50). What is the value of the pixel located at point (10, 10)? (wynn.png)
-#   -- R=28, G=81, B=67
+#   -- R=180, G=141, B=148
+#endregion
+#region 6 - Resizing Quiz
+if IS_SHOW_TASK_6:
+
+    local_img = cv2.imread("src/florida_trip_small.png")
+    local_img_resz = cv2.resize(local_img, (100, int(img.shape[0] * (100 / img.shape[1]))), interpolation=cv2.INTER_NEAREST)
+    print("The pixel value located at x=20, y=74",  local_img_resz[74, 20])
+    local_img_resz = cv2.resize(local_img, (img.shape[1]*2, img.shape[0]*2), interpolation=cv2.INTER_CUBIC)
+    print("The pixel value located at x=170, y=367",  local_img_resz[367, 170])
+
+#~> "Corect answers"
+# - Why do we keep in mind the aspect ratio of an image when resizing?
+#   -- Because ignoring the aspect ratio when resizing an image can lead to distorted and squished output images.
+# - Download the source code to this lesson and use the florida_trip_small.png small image to answer the following question. 
+#   Resize the image to have a width of 100px using the cv2.INTER_NEAREST interpolation method. 
+#   What is (approximately) the pixel value located at x=20, y=74?
+#   -- R=16, G=19, B=26
+# - Now, use the same image to make the image twice it’s original size using cv2.INTER_CUBIC interpolation.
+#   What is the value of the pixel located at x=170, y=367 in our resized image?
+#   -- R=20, G=20, B=25
+#endregion
+#region 7 - Flipping Quiz
+if IS_SHOW_TASK_7:
+    local_img = cv2.imread("src/florida_trip.png")
+    img_rotated = rotate(cv2.flip(local_img, 1), -45)
+
+    print("The pixel value located at x=441, y=189", cv2.flip(img_rotated, 0)[189, 441])
+#~> "Corect answers"
+# - Download the source code and images associated with this lesson. 
+#   Then, use the florida_trip.png to answer the following question. 
+#   Use OpenCV to flip the image horizontally — what is the value of the pixel located at x=259, y=235?
+#   -- R=183, G=192, B=189
+# - Use the original image from the previous question and flip it horizontally, 
+#   followed by a 45 degree counter-clockwise rotation, and lastly a vertical flip. 
+#   What is (approximately) the pixel value located at x=441, y=189?
+#   -- R=195, G=149, B=133
 #endregion
