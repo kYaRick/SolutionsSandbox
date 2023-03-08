@@ -1,6 +1,6 @@
 # libs scope:
-import numpy as np
 import cv2
+import numpy as np
 
 
 # ~~~~~~~~~~~~ Config flags ~~~~~~~~~~~~#
@@ -26,6 +26,7 @@ img = cv2.imread("src/giraffe.png")
 img2 = cv2.imread("src/wynn.png")
 img3 = cv2.imread("src/florida_trip_small.png")
 img4 = cv2.imread("src/florida_trip.png")
+img5 = cv2.imread("src/grand_canyon.png")
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
 
 # region Global scope
@@ -221,10 +222,34 @@ if IS_SHOW_TASK_8:
 # endregion
 # region 9 - Image Arithmetic Quiz
 if IS_SHOW_TASK_9:
-    pass
+    def conv_uint8(num): 
+        return 0 if num < 1 else 255 if num > 255 else num
+
+    result = cv2.add(np.array([200]), np.array([68]))
+    print(f"cv2 sum result: {conv_uint8(result)}")
+    result = np.uint8(200) + np.uint8(68)
+    print(f"numpu sum result: {result}")
+    result = cv2.add(np.array([1]), np.array([-251]))
+    print(f"cv2 sub result: {conv_uint8(result)}")
+    result = np.uint8(1) - np.uint8(251)
+    print(f"numpu sub result: {result}")
+
+    result = cv2.add(img5, np.ones_like(img5).astype(np.uint8) * 75)
+    print("grand_canyon.png after added value of 75\n\tresult pixel (x=61, y=152) state: ", result[152, 61])
 # ~> "Corect answers"
-# - [Question]
-#   -- [Answer]
+# - Assuming 8-bit, unsigned integers, what is the output of 200 + 68 using OpenCV?
+#   -- 255, but in my case I get in my case I get 268, although this is not correct, 
+#       because if we turn to the resources, the processor uses an 8-bit system according 
+#       to the RGB format, accordingly the maximum value will be 255 and if exceeded it will be 255.
+# - Assuming 8-bit, unsigned integers, what is the output of 200 + 68 using NumPy?
+#   -- 12
+# - Again, assuming 8-bit unsigned integers, what is the output of 1 – 251 using OpenCV?
+#   -- 0
+# - What about the output of 1 – 251 using NumPy?
+#   -- 6
+# - Add value of 75 to all pixels to the grand_canyon.png image using the cv2.add function. 
+#   What is the value of the pixel located at x=61, y=152?
+#   -- R=176, G=117, B=99
 # endregion
 # region 10 - Bitwise Operations Quiz
 if IS_SHOW_TASK_10:
