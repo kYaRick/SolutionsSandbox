@@ -255,20 +255,55 @@ if IS_SHOW_TASK_9:
 if IS_SHOW_TASK_10:
     pass
 # ~> "Corect answers"
-# - [Question]
-#   -- [Answer]
+# - What is the difference between a bitwise AND and OR?
+#   -- A bitwise AND is only true when both inputs are > 0; a bitwise OR is true when either inputs are > 0.
+# - What is the difference between a bitwise OR and XOR?
+#   -- A bitwise OR is true when either input is > 0; 
+#      a bitwise XOR is true if one of the inputs is > 0, but not both
+# - What does the NOT operator do?
+#   -- Inverts the "ON" and "OFF" pixels
 # endregion
-# region 11 - Bitwise Operations Quiz
+# region 11 - Masking Quiz
 if IS_SHOW_TASK_11:
-    pass
+    # create a black image with a white square
+    img = np.zeros((500, 500), dtype=np.uint8)
+    cv2.rectangle(img, (100, 100), (400, 400), 255, -1)
+
+    # display the image
+    cv2.imshow('Task 11.1', img)
+
+    x, y = 0, 0
+    cv2.rectangle(img2, (x - 5, y - 5), (x + 5, y + 5), 255, -1)
+    cv2.imshow('Task 11.2', img2)
+
+    cv2.waitKey(IMG_DEMO_TIME)
+    cv2.destroyAllWindows()
 # ~> "Corect answers"
-# - [Question]
-#   -- [Answer]
+# - What function would you use to draw a square mask?
+#   -- cv2.square
+# - What is the correct code to draw a 10 x 10 square mask centered at coordinates (x, y)?
+# - info:
+#   here, we use cv2.rectangle() to draw a rectangle (which is a square, since both sides are equal) 
+#   on the mask image. The first argument specifies the image on which to draw the rectangle, 
+#   the second argument is the starting point of the rectangle, and the third argument is the ending 
+#   point of the rectangle.
+#   In this case, we specify the starting point as (x - 5, y - 5) and the ending point as (x + 5, y + 5). 
+#   Since we want a 10 x 10 square, we subtract 5 from the x and y coordinates to get the starting point 
+#   and add 5 to the x and y coordinates to get the ending point. The fourth argument specifies the color 
+#   of the rectangle, which is 255 (white) in this case. Finally, the fifth argument specifies the thickness 
+#   of the rectangle, which is -1 (filled rectangle) in this case.
+#   -- cv2.rectangle(mask, (x - 5, y - 5), (x + 5, y + 5), 255, -1)
 # endregion
 # region 12 - Splitting and Merging Quiz
 if IS_SHOW_TASK_12:
-    pass
+    print("Red channel (x=180, y=94): ", cv2.split(img3)[-1][94, 180])
+    print("Green channel (x=73, y=13): ", cv2.split(img3)[1][78, 13])
+    print("Blue channel (x=80, y=5): ", cv2.split(img3)[-1][5, 80])
 # ~> "Corect answers"
-# - [Question]
-#   -- [Answer]
+# - What is the value of the Red channel at x=180, y=94?
+#   -- 198
+# - The value of the Blue channel at x=13, y=78
+#   -- 82
+# - And the Green channel at x=80, y=5?
+#   -- 240
 # endregion
