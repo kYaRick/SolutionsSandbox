@@ -5,7 +5,7 @@ import numpy as np
 
 # ~~~~~~~~~~~~ Config flags ~~~~~~~~~~~~#
 # Timming:
-IMG_DEMO_TIME = 2000  # ms
+IMG_DEMO_TIME = 0  # ms
 
 # Task flags:
 IS_SHOW_TASK_1 = False
@@ -22,11 +22,11 @@ IS_SHOW_TASK_11 = False
 IS_SHOW_TASK_12 = False
 
 # Sources path:
-img = cv2.imread("src/giraffe.png")
-img2 = cv2.imread("src/wynn.png")
-img3 = cv2.imread("src/florida_trip_small.png")
-img4 = cv2.imread("src/florida_trip.png")
-img5 = cv2.imread("src/grand_canyon.png")
+img = cv2.imread(".\kYa_lp1\src\giraffe.png")
+img2 = cv2.imread(".\kYa_lp1\src\wynn.png")
+img3 = cv2.imread(".\kYa_lp1\src/florida_trip_small.png")
+img4 = cv2.imread(".\kYa_lp1\src/florida_trip.png")
+img5 = cv2.imread(".\kYa_lp1\src/grand_canyon.png")
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
 
 # region Global scope
